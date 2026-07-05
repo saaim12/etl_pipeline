@@ -4,6 +4,8 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, from_json, to_date
 from pyspark.sql.types import StructType, StringType, IntegerType, DoubleType
 
+os.environ["HADOOP_HOME"] = r"C:\hadoop"
+os.environ["PATH"] = r"C:\hadoop\bin;" + os.environ["PATH"]
 load_dotenv()
 
 KEY = os.environ["DO_SPACES_KEY"]
@@ -15,9 +17,9 @@ spark = (
     SparkSession.builder
     .appName("kafka-to-bronze")
     .config("spark.jars.packages",
-            "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,"
-            "org.apache.hadoop:hadoop-aws:3.3.4,"
-            "com.amazonaws:aws-java-sdk-bundle:1.12.262")
+        "org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,"
+        "org.apache.hadoop:hadoop-aws:3.3.4,"
+        "com.amazonaws:aws-java-sdk-bundle:1.12.262")
     # this is for digital ocean spaces, if you are using AWS S3, you can remove these lines
     .config("spark.hadoop.fs.s3a.endpoint", ENDPOINT)
     .config("spark.hadoop.fs.s3a.access.key", KEY)

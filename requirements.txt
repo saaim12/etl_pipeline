@@ -1,0 +1,4 @@
+confluent-kafka==2.6.0
+faker==33.1.0
+pyspark==3.5.0
+python-dotenv==1.0.1
